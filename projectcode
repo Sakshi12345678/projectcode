@@ -1,0 +1,31 @@
+unsigned long timing;
+
+void setup()
+{
+
+    pinMode(D7, OUTPUT);
+    pinMode(D0, OUTPUT);
+    pinMode(D5, INPUT); 
+    pinMode(D1, OUTPUT);
+    pinMode(D2, OUTPUT);
+}
+
+void loop(){
+    
+    delay(500);
+    digitalWrite(D1, HIGH);
+    delayMicroseconds(20);
+    digitalWrite(D1, LOW); 
+    timing = pulseIn(D5, HIGH);
+    if (timing > 3200){                                         
+    digitalWrite(D7, LOW);
+    digitalWrite(D2, LOW);
+    digitalWrite(D0, LOW); 
+    } else {
+        digitalWrite(D2, HIGH);
+    digitalWrite(D7, HIGH);
+    digitalWrite(D0, HIGH);
+    Particle.publish("warning");
+    } 
+   
+}
